@@ -29,6 +29,7 @@ class NoteAPI(serializerType: Serializer){
             foundNote.noteTitle = note.noteTitle
             foundNote.notePriority = note.notePriority
             foundNote.noteCategory = note.noteCategory
+            foundNote.noteContent = note.noteContent
             return true
         }
 
@@ -74,6 +75,11 @@ class NoteAPI(serializerType: Serializer){
 
     fun searchByTitle(searchString : String) =
         formatListString(notes.filter { note -> note.noteTitle.contains(searchString, ignoreCase = true)})
+
+    fun searchByCategory(searchString : String) =
+        formatListString(notes.filter { note -> note.noteCategory.contains(searchString, ignoreCase = true)})
+
+
 
     fun findNote(index: Int): Note? {
         return if (isValidListIndex(index, notes)) {
