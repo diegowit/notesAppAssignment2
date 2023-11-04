@@ -1,0 +1,4 @@
+package persistence
+
+interface Serializer {
+}
