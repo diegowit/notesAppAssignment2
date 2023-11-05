@@ -30,6 +30,7 @@ class NoteAPI(serializerType: Serializer){
             foundNote.notePriority = note.notePriority
             foundNote.noteCategory = note.noteCategory
             foundNote.noteContent = note.noteContent
+            foundNote.reminderDays = note.reminderDays
             return true
         }
 
@@ -70,6 +71,7 @@ class NoteAPI(serializerType: Serializer){
 
     fun numberOfNotes(): Int = notes.size
     fun numberOfActiveNotes(): Int = notes.count{note: Note -> !note.isNoteArchived}
+
     fun numberOfArchivedNotes(): Int = notes.count{note: Note -> note.isNoteArchived}
     fun numberOfNotesByPriority(priority: Int): Int = notes.count { p: Note -> p.notePriority == priority }
 

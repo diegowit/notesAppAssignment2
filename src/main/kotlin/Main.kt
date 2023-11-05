@@ -68,7 +68,8 @@ fun addNote(){
     val notePriority = readValidPriority("Enter a priority (1-low, 2, 3, 4, 5-high): ")
     val noteCategory = readValidCategory("Enter a category for the note from ${CategoryUtility.categories}: ")
     val noteContent = readNextLine("Enter The notes Content")
-    val isAdded = noteAPI.add(Note(noteTitle, notePriority, noteCategory, false, noteContent))
+    val reminderDays = readNextInt("Enter the number of days to remind before the Event")
+    val isAdded = noteAPI.add(Note(noteTitle, notePriority, noteCategory, false, noteContent, reminderDays))
 
     if (isAdded) {
         println("Added Successfully")
@@ -207,8 +208,9 @@ fun listNoteByPriority5() {
                 val noteCategory =
                     readValidCategory("Enter a category for the note from ${CategoryUtility.categories}: ")
                 val noteContent = readNextLine("Enter The notes Content")
+                val reminderDays = readNextInt("Enter the number of days to remind before the Event")
 
-                if (noteAPI.updateNote(indexToUpdate, Note(noteTitle, notePriority, noteCategory, false, noteContent))) {
+                if (noteAPI.updateNote(indexToUpdate, Note(noteTitle, notePriority, noteCategory, false, noteContent, reminderDays))) {
                     println("Update Successful")
                 } else {
                     println("Update Failed")
