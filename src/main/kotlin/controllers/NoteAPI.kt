@@ -69,11 +69,24 @@ class NoteAPI(serializerType: Serializer){
             else "${numberOfNotesByPriority(priority)} notes with priority $priority: $listOfNotes"
         }
 
+    fun listNotesBySelectedReminderDay(reminder: Int): String =
+        if (notes.isEmpty()) "No notes stored"
+        else {
+            val listOfNotes = formatListString(notes.filter{ note -> note.reminderDays == reminder})
+            if (listOfNotes.equals("")) "No notes with priority: $reminder"
+            else "${numberOfNotesByReminderDay(reminder)} notes with priority $reminder: $listOfNotes"
+        }
+
+
+
+
     fun numberOfNotes(): Int = notes.size
     fun numberOfActiveNotes(): Int = notes.count{note: Note -> !note.isNoteArchived}
 
     fun numberOfArchivedNotes(): Int = notes.count{note: Note -> note.isNoteArchived}
     fun numberOfNotesByPriority(priority: Int): Int = notes.count { p: Note -> p.notePriority == priority }
+
+    fun numberOfNotesByReminderDay(reminder: Int): Int = notes.count{ p: Note -> p.reminderDays == reminder }
 
     fun searchByTitle(searchString : String) =
         formatListString(notes.filter { note -> note.noteTitle.contains(searchString, ignoreCase = true)})

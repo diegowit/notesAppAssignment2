@@ -68,7 +68,7 @@ fun addNote(){
     val notePriority = readValidPriority("Enter a priority (1-low, 2, 3, 4, 5-high): ")
     val noteCategory = readValidCategory("Enter a category for the note from ${CategoryUtility.categories}: ")
     val noteContent = readNextLine("Enter The notes Content")
-    val reminderDays = readNextInt("Enter the number of days to remind before the Event")
+    val reminderDays = readValidPriority("Enter the number of days to remind before the Event (Maximum 3 days)")
     val isAdded = noteAPI.add(Note(noteTitle, notePriority, noteCategory, false, noteContent, reminderDays))
 
     if (isAdded) {
