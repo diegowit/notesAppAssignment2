@@ -84,7 +84,8 @@ fun listNotes(){
                   > --------------------------------
                   > |   1) View ALL notes          |
                   > |   2) View ACTIVE notes       |
-                  > |   3) View ARCHIVED notes     |
+                  > |   3) View ARCHIVED notes 
+                  >     4) priority listing Menu   |
                   > --------------------------------
          > ==>> """.trimMargin(">"))
 
@@ -92,6 +93,7 @@ fun listNotes(){
             1 -> listAllNotes();
             2 -> listActiveNotes();
             3 -> listArchivedNotes();
+            4 -> runPriority();
             else -> println("Invalid option entered: " + option);
         }
     } else {
@@ -113,6 +115,84 @@ fun listArchivedNotes() {
 
 
 }
+
+/**
+ *
+ *  List Notes Priority
+ *
+ */
+fun runPriority() {
+
+    do {
+        when (val option = runPriorityMenu()) {
+            1 ->  listNoteByPriority1()
+            2 ->  listNoteByPriority2()
+            3 ->  listNoteByPriority3()
+            4 ->  listNoteByPriority4()
+            5 ->  listNoteByPriority5()
+
+
+
+            0 -> return // Return to main menu
+            else -> println("Invalid menu choice: $option")
+        }
+    } while (true)
+}
+
+fun runPriorityMenu(): Int {
+
+    print(
+        """
+╔═══════════════════════════════════════════════════╗
+║                   Employee Menu                   ║
+╠═══════════════════════════════════════════════════╣
+║   1) List Note By Priority of 1                   ║
+║   2) List Note By Priority of 2                   ║
+║   3) List Note By Priority of 3                   ║
+║   4) List Note By Priority of 4                   ║
+║   5) List Note By Priority of 5                   ║
+║                                                   ║
+║                                                   ║
+║                                                   ║
+╚═══════════════════════════════════════════════════╝
+║   0) Return to Main Menu                          ║
+╚═══════════════════════════════════════════════════╝
+            
+            
+       ==>> """.trimMargin()
+    )
+    return readLine()!!.toInt()
+    // Returning the user input as an integer.
+}
+
+fun listNoteByPriority1() {
+    println(noteAPI.listNotesBySelectedPriority(1))
+
+}
+
+fun listNoteByPriority2() {
+    println(noteAPI.listNotesBySelectedPriority(2))
+
+}
+
+fun listNoteByPriority3() {
+    println(noteAPI.listNotesBySelectedPriority(3))
+
+}
+
+fun listNoteByPriority4() {
+    println(noteAPI.listNotesBySelectedPriority(4))
+
+}
+
+fun listNoteByPriority5() {
+    println(noteAPI.listNotesBySelectedPriority(5))
+
+}
+
+
+
+
 
 
     fun updateNote() {
