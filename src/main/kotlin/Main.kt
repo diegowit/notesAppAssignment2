@@ -82,12 +82,13 @@ fun listNotes(){
     if (noteAPI.numberOfNotes() > 0) {
         val option = readNextInt(
             """
-                  > --------------------------------
-                  > |   1) View ALL notes          |
-                  > |   2) View ACTIVE notes       |
-                  > |   3) View ARCHIVED notes 
-                  >     4) priority listing Menu   |
-                  > --------------------------------
+                  > ----------------------------------
+                  > |   1) View ALL notes             |
+                  > |   2) View ACTIVE notes          |
+                  > |   3) View ARCHIVED notes        |
+                  > |   4) priority listing Menu      |
+                  > |  5) reminder Days listing Menu  |
+                  > ----------------------------------
          > ==>> """.trimMargin(">"))
 
         when (option) {
@@ -95,6 +96,7 @@ fun listNotes(){
             2 -> listActiveNotes();
             3 -> listArchivedNotes();
             4 -> runPriority();
+            5 -> runReminder();
             else -> println("Invalid option entered: " + option);
         }
     } else {
@@ -145,7 +147,7 @@ fun runPriorityMenu(): Int {
     print(
         """
 ╔═══════════════════════════════════════════════════╗
-║                   Employee Menu                   ║
+║                   Priority Menu                   ║
 ╠═══════════════════════════════════════════════════╣
 ║   1) List Note By Priority of 1                   ║
 ║   2) List Note By Priority of 2                   ║
@@ -194,6 +196,71 @@ fun listNoteByPriority5() {
 
 
 
+/**
+ *
+ *  List Notes by Reminder days
+ *
+ */
+fun runReminder() {
+
+    do {
+        when (val option = runReminderMenu()) {
+            1 ->  listNoteByReminder1()
+            2 ->  listNoteByReminder2()
+            3 ->  listNoteByReminder3()
+
+
+            0 -> return // Return to main menu
+            else -> println("Invalid menu choice: $option")
+        }
+    } while (true)
+}
+
+fun runReminderMenu(): Int {
+
+    print(
+        """
+╔═══════════════════════════════════════════════════╗
+║                   Reminder Menu                   ║
+╠═══════════════════════════════════════════════════╣
+║   1) List Note By Priority of 1                   ║
+║   2) List Note By Priority of 2                   ║
+║   3) List Note By Priority of 3                   ║
+║   4) List Note By Priority of 4                   ║
+║   5) List Note By Priority of 5                   ║
+║                                                   ║
+║                                                   ║
+║                                                   ║
+╚═══════════════════════════════════════════════════╝
+║   0) Return to Main Menu                          ║
+╚═══════════════════════════════════════════════════╝
+            
+            
+       ==>> """.trimMargin()
+    )
+    return readLine()!!.toInt()
+    // Returning the user input as an integer.
+}
+
+fun listNoteByReminder1() {
+    println(noteAPI.listNotesBySelectedReminderDay(1))
+
+}
+
+fun listNoteByReminder2() {
+    println(noteAPI.listNotesBySelectedReminderDay(2))
+
+}
+
+fun listNoteByReminder3() {
+    println(noteAPI.listNotesBySelectedReminderDay(3))
+
+}
+
+
+
+/****************************************/
+
 
 
     fun updateNote() {
@@ -208,7 +275,7 @@ fun listNoteByPriority5() {
                 val noteCategory =
                     readValidCategory("Enter a category for the note from ${CategoryUtility.categories}: ")
                 val noteContent = readNextLine("Enter The notes Content")
-                val reminderDays = readNextInt("Enter the number of days to remind before the Event")
+                val reminderDays = readValidPriority("Enter the number of days to remind before the Event (Maximum 3 days)")
 
                 if (noteAPI.updateNote(indexToUpdate, Note(noteTitle, notePriority, noteCategory, false, noteContent, reminderDays))) {
                     println("Update Successful")
@@ -276,7 +343,7 @@ fun searchMenu(): Int {
     print(
         """
 ╔═══════════════════════════════════════════════════╗
-║                   Employee Menu                   ║
+║                   Search   Menu                   ║
 ╠═══════════════════════════════════════════════════╣
 ║   1) Search Note By title                         ║
 ║   2) Search Note By Category                      ║

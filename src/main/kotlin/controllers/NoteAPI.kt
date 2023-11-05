@@ -73,8 +73,8 @@ class NoteAPI(serializerType: Serializer){
         if (notes.isEmpty()) "No notes stored"
         else {
             val listOfNotes = formatListString(notes.filter{ note -> note.reminderDays == reminder})
-            if (listOfNotes.equals("")) "No notes with priority: $reminder"
-            else "${numberOfNotesByReminderDay(reminder)} notes with priority $reminder: $listOfNotes"
+            if (listOfNotes.equals("")) "No notes with reminder Days: $reminder"
+            else "${numberOfNotesByReminderDay(reminder)} notes with reminder Days $reminder: $listOfNotes"
         }
 
 
