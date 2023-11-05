@@ -32,4 +32,18 @@ object ValidateInput {
         } while (true)
     }
 
+    @JvmStatic
+    fun readValidReminderDay(prompt: String?): Int {
+        var input =  readNextInt(prompt)
+        do {
+            if (Utilities.validRange(input, 1 ,3))
+                return input
+            else {
+                print("Invalid priority $input.")
+                input = readNextInt(prompt)
+            }
+        } while (true)
+    }
+
 }
+
