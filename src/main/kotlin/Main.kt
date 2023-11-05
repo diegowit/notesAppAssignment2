@@ -179,7 +179,7 @@ fun runSearch () {
         when (val option = searchMenu()) {
             1 ->  searchNoteByTitle()
             2 ->  searchNoteByCategory()
-            // 3 ->  SearchNoteBy()
+            3 ->  searchNoteByContent()
 
 
 
@@ -197,8 +197,8 @@ fun searchMenu(): Int {
 ║                   Employee Menu                   ║
 ╠═══════════════════════════════════════════════════╣
 ║   1) Search Note By title                         ║
-║   2) Search Note By                               ║
-║   3) Search Note By                               ║
+║   2) Search Note By Category                      ║
+║   3) Search Note By  Content                      ║
 ║                                                   ║
 ║                                                   ║
 ║                                                   ║
@@ -227,6 +227,16 @@ fun searchMenu(): Int {
   {
     val searchCategory = readNextLine("Enter the Category to search by: ")
     val searchResults = noteAPI.searchByCategory(searchCategory)
+    if (searchResults.isEmpty()) {
+        println("No notes found")
+    } else {
+        println(searchResults)
+    }
+}
+fun searchNoteByContent()
+{
+    val searchContent = readNextLine("Enter the Content to search by: ")
+    val searchResults = noteAPI.searchByContent(searchContent)
     if (searchResults.isEmpty()) {
         println("No notes found")
     } else {

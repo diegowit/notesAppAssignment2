@@ -79,6 +79,9 @@ class NoteAPI(serializerType: Serializer){
     fun searchByCategory(searchString : String) =
         formatListString(notes.filter { note -> note.noteCategory.contains(searchString, ignoreCase = true)})
 
+    fun searchByContent(searchString : String) =
+        formatListString(notes.filter { note -> note.noteContent.contains(searchString, ignoreCase = true)})
+
 
 
     fun findNote(index: Int): Note? {
